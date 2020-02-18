@@ -1,0 +1,17 @@
+schedule: 60
+wio:
+  base_path: us.wio.seeed.io
+  base_port: "443"
+sensors:
+  - name: fahrenheit
+    sensor_token_key: WIO1
+  - name: celsius
+    sensor_token_key: WIO1
+#  - name: lux
+#    sensor_token_key: WIO2
+  - name: humidity
+    sensor_token_key: WIO1
+  - name: quality
+    sensor_token_key: WIO2
+  - name: moisture
+    sensor_token_key: WIO3
