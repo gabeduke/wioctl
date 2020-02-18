@@ -70,6 +70,7 @@ func init() {
 	flags.String("influx-token", "", "Influx API Token (env variable: WIOCTL_INFLUX_TOKEN)")
 	flags.String("influx-addr", "", "Influx Address (env variable: WIOCTL_INFLUX_ADDR)")
 	flags.StringP("log-level", "l", "info", "Log level (error|INFO|debug|trace)")
+	flags.IntP("schedule", "s", 60, "Schedule (in seconds)")
 
 	viper.BindPFlags(flags)
 
@@ -131,8 +132,9 @@ func initConfig() {
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
-		log.Debugf("Using config file:", viper.ConfigFileUsed())
+		log.Infof("Using config file: %s", viper.ConfigFileUsed())
+	} else {
+		log.Fatal("config file not found")
 	}
 
 }
-

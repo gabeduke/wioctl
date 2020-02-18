@@ -50,7 +50,7 @@ var runCmd = &cobra.Command{
 		go func() {
 			for {
 				app.SetConfig(<-cfgCh)
-				log.Println("NewWioctl config loaded")
+				log.Info("NewWioctl config loaded")
 			}
 		}()
 
