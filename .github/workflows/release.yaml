@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: docker login
+        uses: azure/docker-login@v1
+        with:
+          username: dukeman
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      -
         name: Checkout
         uses: actions/checkout@v2
       -
@@ -29,5 +35,3 @@ jobs:
           key: ${{ secrets.YOUR_PRIVATE_KEY }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCKER_USER: dukeman
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
