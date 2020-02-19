@@ -1,0 +1,12 @@
+# declare ConfigMap as a resource
+resources:
+  - deployment.yaml
+
+# declare ConfigMap from a ConfigMapGenerator
+configMapGenerator:
+  - name: wioctl-config
+    files:
+      - configs/.wioctl.yaml
+secretGenerator:
+  - name: wioctl-secret
+    env: secret/.env

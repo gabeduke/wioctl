@@ -82,6 +82,7 @@ func (w *Wio) GetReading() (float64, error) {
 	w.logger.Debug("Get Reading")
 
 	client := &http.Client{}
+	w.logger.Trace(w.req)
 
 	resp, err := client.Do(w.req)
 	if err != nil {

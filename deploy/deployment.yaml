@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wioctl-deployment
+  labels:
+    app: wioctl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wioctl
+  template:
+    metadata:
+      labels:
+        app: wioctl
+    spec:
+      containers:
+        - name: wioctl
+          image: dukeman/wioctl:v0.0.0
+          imagePullPolicy: Always
+          args:
+            - run
+            - --log-level
+            - trace
+          volumeMounts:
+            - name: wioctl-config
+              mountPath: /etc/wioctl
+          envFrom:
+            - secretRef:
+                name: wioctl-secret
+      volumes:
+        - name: wioctl-config
+          configMap:
+            name: wioctl-config
