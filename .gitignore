@@ -1,3 +1,4 @@
 .env
 wioctl
 dist/
+.gitsecret/keys/random_seed

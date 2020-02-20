@@ -2,6 +2,10 @@
 resources:
   - deployment.yaml
 
+images:
+  - name: dukeman/wioctl
+    newTag: v0.3.0
+
 # declare ConfigMap from a ConfigMapGenerator
 configMapGenerator:
   - name: wioctl-config
