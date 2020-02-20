@@ -13,4 +13,5 @@ configMapGenerator:
       - configs/.wioctl.yaml
 secretGenerator:
   - name: wioctl-secret
-    env: secret/.env
+    envs:
+      - secret/.env

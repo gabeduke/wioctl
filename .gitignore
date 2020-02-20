@@ -1,4 +1,6 @@
 .env
 wioctl
 dist/
+bin/
+!bin/Makefile
 .gitsecret/keys/random_seed
