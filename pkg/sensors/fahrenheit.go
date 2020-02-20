@@ -2,9 +2,18 @@ package sensors
 
 import (
 	"encoding/json"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
+)
+
+var (
+	fahrenheitGauge = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "wioctl_fahrenheit_gauge_current",
+		Help: "The current fahrenheit gauge reading",
+	})
 )
 
 type fahrenheitJson struct {
@@ -40,6 +49,8 @@ func fahrenheitHandler(logger *log.Entry, response *http.Response) float64 {
 	if err != nil {
 		return 0
 	}
+
+	fahrenheitGauge.Set(value)
 
 	return value
 }

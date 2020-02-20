@@ -20,8 +20,6 @@ spec:
           imagePullPolicy: Always
           args:
             - run
-            - --log-level
-            - trace
           volumeMounts:
             - name: wioctl-config
               mountPath: /etc/wioctl

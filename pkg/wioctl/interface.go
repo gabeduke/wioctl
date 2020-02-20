@@ -95,7 +95,7 @@ func (w *Wioctl) scheduler(s *sensors.Wio, tick *time.Ticker) {
 			log.Error(err)
 		}
 
-		s.ReportMetric(w.influxClient, reading)
+		s.ReportMetricInflux(w.influxClient, reading)
 
 	}
 }

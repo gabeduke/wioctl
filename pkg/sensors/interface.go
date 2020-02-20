@@ -95,7 +95,33 @@ func (w *Wio) GetReading() (float64, error) {
 
 }
 
-func (w *Wio) ReportMetric(influxClient *influxdb.Client, value float64) error {
+func (w *Wio) ReportMetricPromPushGateway(influxClient *influxdb.Client, value float64) error {
+	w.logger.Debug("Report Metric")
+
+	if value == 0 {
+		w.logger.Errorf("no value found for %s", w.Sensor.id)
+	}
+
+	metrics := []influxdb.Metric{
+		influxdb.NewRowMetric(
+			map[string]interface{}{w.Sensor.id: value},
+			"fleet-metrics",
+			map[string]string{
+				"sensor_path": w.Sensor.path,
+			},
+			time.Now().UTC()),
+	}
+
+	_, err := influxClient.Write(context.Background(), "Fleet IOT", "c670b60f97bc7205", metrics...)
+	if err != nil {
+		return err
+	}
+
+	w.logger.Infof("Influx write successful")
+	return nil
+}
+
+func (w *Wio) ReportMetricInflux(influxClient *influxdb.Client, value float64) error {
 	w.logger.Debug("Report Metric")
 
 	if value == 0 {

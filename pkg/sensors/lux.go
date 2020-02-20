@@ -3,9 +3,18 @@ package sensors
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
+)
+
+var (
+	luxGauge = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "wioctl_lux_gauge_current",
+		Help: "The current lux gauge reading",
+	})
 )
 
 type luxJson struct {
@@ -47,6 +56,8 @@ func luxHandler(logger *log.Entry, response *http.Response) float64 {
 	if err != nil {
 		return 0
 	}
+
+	luxGauge.Set(value)
 
 	return value
 }
