@@ -23,9 +23,11 @@ package cmd
 
 import (
 	"github.com/gabeduke/wioctl/pkg/wioctl"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"net/http"
 )
 
 // runCmd represents the run command
@@ -54,7 +56,11 @@ var runCmd = &cobra.Command{
 			}
 		}()
 
-		app.Run()
+		go app.Run()
+
+		http.Handle("/metrics", promhttp.Handler())
+		log.Fatal(http.ListenAndServe(":9001", nil))
+
 	},
 }
 
