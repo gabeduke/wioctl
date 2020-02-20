@@ -4,7 +4,7 @@ resources:
 
 images:
   - name: dukeman/wioctl
-    newTag: v0.3.0
+    newTag: v0.4.0
 
 # declare ConfigMap from a ConfigMapGenerator
 configMapGenerator:
