@@ -1,9 +1,0 @@
-
-name: Changelog
-
-on:
-  push:
-    branches:
-      - develop
-
-jobs:
