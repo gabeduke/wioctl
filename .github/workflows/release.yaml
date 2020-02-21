@@ -27,14 +27,6 @@ jobs:
         with:
           go-version: 1.13.x
       -
-        name: generate-release-changelog
-        uses: docker://ferrarimarco/github-changelog-generator:1.15.0.pre.beta
-        env:
-          CHANGELOG_GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-          SRC_PATH: /github/workspace
-        with:
-          args: -u gabeduke -p wioctl --release-branch release
-      -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v1
         with:
