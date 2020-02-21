@@ -146,3 +146,4 @@ func (w *Wio) ReportMetricInflux(influxClient *influxdb.Client, value float64) e
 	w.logger.Infof("Influx write successful")
 	return nil
 }
+

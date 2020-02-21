@@ -2,18 +2,9 @@ package sensors
 
 import (
 	"encoding/json"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
-)
-
-var (
-	moistureGauge = promauto.NewGauge(prometheus.GaugeOpts{
-		Name: "wioctl_moisture_gauge_current",
-		Help: "The current moisture gauge reading",
-	})
 )
 
 type moistureJson struct {
@@ -50,7 +41,8 @@ func moistureHandler(logger *log.Entry, response *http.Response) float64 {
 		return 0
 	}
 
-	moistureGauge.Set(value)
+	gauge := getNewSensorGauge("moisture")
+	gauge.Set(value)
 
 	return value
 }

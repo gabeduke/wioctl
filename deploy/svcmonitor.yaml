@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: wioctl
+  name: wioctl
+spec:
+  endpoints:
+  - honorLabels: true
+    path: /metrics
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - wioctl
+  selector:
+    matchLabels:
+      app: wioctl

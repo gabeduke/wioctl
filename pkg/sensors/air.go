@@ -2,18 +2,9 @@ package sensors
 
 import (
 	"encoding/json"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
-)
-
-var (
-	airQualityGauge = promauto.NewGauge(prometheus.GaugeOpts{
-		Name: "wioctl_airquality_gauge_current",
-		Help: "The current air quality gauge reading",
-	})
 )
 
 type airQualityJson struct {
@@ -50,7 +41,9 @@ func airQualityHandler(logger *log.Entry, response *http.Response) float64 {
 		return 0
 	}
 
-	airQualityGauge.Set(value)
+	gauge := getNewSensorGauge("air")
+	gauge.Set(value)
+
 
 	return value
 }
