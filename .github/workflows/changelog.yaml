@@ -17,7 +17,7 @@ jobs:
         uses: charmixer/auto-changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release_branch: 'develop'
+          release_branch: develop
 
       - name: Push changelog
         uses: docker://whizark/chandler
