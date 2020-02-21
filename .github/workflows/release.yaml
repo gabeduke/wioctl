@@ -33,7 +33,7 @@ jobs:
           CHANGELOG_GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
           SRC_PATH: /github/workspace
         with:
-          args: -u gabeduke -p wioctl --release-branch develop
+          args: -u gabeduke -p wioctl --release-branch release
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v1
