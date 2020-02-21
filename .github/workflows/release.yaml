@@ -27,11 +27,13 @@ jobs:
         with:
           go-version: 1.13.x
       -
-        name: Generate changelog
-        uses: charmixer/auto-changelog-action@v1
+        name: generate-release-changelog
+        uses: docker://ferrarimarco/github-changelog-generator:1.15.0.pre.beta
+        env:
+          CHANGELOG_GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          SRC_PATH: /github/workspace
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release_branch: develop
+          args: -u gabeduke -p wioctl --release-branch develop
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v1
