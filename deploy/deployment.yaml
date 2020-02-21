@@ -11,13 +11,17 @@ spec:
       app: wioctl
   template:
     metadata:
-      labels:
-        app: wioctl
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9001'
     spec:
       containers:
         - name: wioctl
           image: dukeman/wioctl:v0.0.0
           imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+              name: metrics
           args:
             - run
           volumeMounts:

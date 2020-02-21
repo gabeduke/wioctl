@@ -1,7 +1,7 @@
 BIN := $(CURDIR)/bin
 KUSTOMIZE := $(BIN)/kustomize
 KUBECTL := $(BIN)/kubectl
-SUBDIRS = bin
+NAMESPACE := wioctl
 .DEFAULT_GOAL = help
 
 ##########################################################
@@ -29,6 +29,17 @@ fmt:
 bootstrap:
 	make -C $(BIN)
 
+prometheus-operator:									## Deploy Prometheus Operator
+	@$(info Deploying Prometheus Operator)
+	@$(KUBECTL) create namespace monitoring --dry-run -o yaml | $(KUBECTL) apply -f -
+	@$(KUBECTL) apply --wait -n default -f https://raw.githubusercontent.com/coreos/prometheus-operator/v0.34.0/bundle.yaml --all
+	@sleep 5
+	@$(KUBECTL) wait -n default --for condition=established crds --all --timeout=60s
+
+prometheus:												## Deploy Prometheus
+	$(info Deploying Prometheus)
+	$(KUBECTL) kustomize deploy/prometheus | $(KUBECTL) apply -n $(NAMESPACE) -f -
+
 ##########################################################
 ##@ DEPLOY
 ##########################################################
@@ -42,3 +53,6 @@ reveal:
 
 deploy: bootstrap reveal
 	$(KUSTOMIZE) build deploy | $(KUBECTL) apply -f -
+
+prometheus:
+	$(KUBECTL) port-forward svc/prometheus-operated 9090:9090

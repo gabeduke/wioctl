@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  serviceAccountName: prometheus
+  prometheusSpec:
+    retention: 3w
