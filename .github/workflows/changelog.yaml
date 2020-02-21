@@ -22,6 +22,8 @@ jobs:
 
       - name: Generate changelog
         uses: charmixer/auto-changelog-action@v1
+        release_branch:
+          default: 'develop'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
