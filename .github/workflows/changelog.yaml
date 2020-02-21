@@ -1,17 +1,8 @@
 name: Changelog
 
 on:
-  push:
-    branches:
-      - develop
-#  pull_request:
-#    types: [closed]
-#
-#  release:
-#    types: [published]
-#
-#  issues:
-#    types: [closed, edited]
+  release:
+    types: [published]
 
 jobs:
   generate_changelog:
