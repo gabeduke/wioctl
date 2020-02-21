@@ -1,14 +1,17 @@
 name: Changelog
 
 on:
-  pull_request:
-    types: [closed]
-
-  release:
-    types: [published]
-
-  issues:
-    types: [closed, edited]
+  push:
+    branches:
+      - develop
+#  pull_request:
+#    types: [closed]
+#
+#  release:
+#    types: [published]
+#
+#  issues:
+#    types: [closed, edited]
 
 jobs:
   generate_changelog:
@@ -25,7 +28,7 @@ jobs:
       - name: Push changelog
         uses: docker://whizark/chandler
         env:
-          CHANDLER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANDLER_GITHUB_API_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           args: push
 
