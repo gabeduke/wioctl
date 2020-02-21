@@ -37,7 +37,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v1
         with:
           version: latest
-          args: release --rm-dist --release-notes=/github/workspace/CHANGELOG.md
+          args: release --rm-dist --release-notes=CHANGELOG.md
           key: ${{ secrets.YOUR_PRIVATE_KEY }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
