@@ -24,9 +24,8 @@ jobs:
 
       - name: Push changelog
         uses: whizark/chandler
-        working-directory: /chandler
         with:
           CHANDLER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        entrypoint: /usr/local/bundle/bin/chandler
-        args: push
+          entrypoint: /usr/local/bundle/bin/chandler
+          args: push
 
