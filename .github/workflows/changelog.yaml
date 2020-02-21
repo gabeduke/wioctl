@@ -23,7 +23,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changelog
-        uses: whizark/chandler
+        uses: docker://whizark/chandler
         with:
           CHANDLER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           entrypoint: /usr/local/bundle/bin/chandler
